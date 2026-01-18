@@ -79,10 +79,18 @@
             + New Chat
         </button>
 
+        <div class="mt-4">
+            <label class="block text-xs text-slate-400 mb-2 font-medium">Model</label>
+            <select id="modelSelect" class="w-full bg-slate-700 text-slate-200 text-sm rounded-lg p-3 border border-slate-600 focus:outline-none focus:border-indigo-500 transition-colors">
+                <option value="gemini">Google Gemini</option>
+                <option value="openai">OpenAI (GPT-3.5)</option>
+            </select>
+        </div>
+
         <div class="flex-1"></div>
 
         <div style="font-size: 0.8rem; color: var(--text-secondary);">
-            Powered by OpenAI
+            Powered by Multi-LLM
         </div>
     </aside>
 
@@ -197,7 +205,8 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        message: text
+                        message: text,
+                        model: document.getElementById('modelSelect').value
                     })
                 });
 

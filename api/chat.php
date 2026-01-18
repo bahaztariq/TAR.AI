@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Services\OpenAIService;
+use App\Services\GeminiService;
 use Dotenv\Dotenv;
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
@@ -38,8 +39,14 @@ if (empty($message)) {
     exit;
 }
 
+$model = $input['model'] ?? 'openai';
+
 try {
-    $service = new OpenAIService();
+    if ($model === 'gemini') {
+        $service = new GeminiService();
+    } else {
+        $service = new OpenAIService();
+    }
     $response = $service->generateResponse($message);
 
     echo json_encode(['response' => $response]);
